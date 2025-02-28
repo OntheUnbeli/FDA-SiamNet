@@ -1,7 +1,7 @@
 _base_ = '../_base_/default_runtime.py'
 
 dataset_type = 'LEVIR_CD_Dataset'
-data_root = '/media/wby/shuju/IDASiamNet/DATA/LEVIR_CD(256)'
+data_root = '/media/wby/shuju/IDASiamNet/DATA/LEVIR_CD(512)'
 
 crop_size = (256, 256)
 train_pipeline = [
@@ -22,8 +22,8 @@ train_pipeline = [
 ]
 test_pipeline = [
     dict(type='MultiImgLoadImageFromFile'),
-    # dict(type='MultiImgResize', scale=(1024, 1024), keep_ratio=True),
-    dict(type='MultiImgResize', scale=(256, 256), keep_ratio=True),
+    dict(type='MultiImgResize', scale=(1024, 1024), keep_ratio=True),
+    # dict(type='MultiImgResize', scale=(256, 256), keep_ratio=True),
     # add loading annotation after ``Resize`` because ground truth
     # does not need to do resize data transform
     dict(type='MultiImgLoadAnnotations'),
@@ -124,6 +124,6 @@ default_hooks = dict(
                     save_best='mIoU'),
     sampler_seed=dict(type='DistSamplerSeedHook'),
     visualization=dict(type='CDVisualizationHook', interval=1, 
-                       img_shape=(256, 256, 3)))
+                       img_shape=(1024, 1024, 3)))
 
 log_processor = dict(type='LogProcessor', window_size=50, by_epoch=True)
